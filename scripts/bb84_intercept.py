@@ -1,8 +1,3 @@
-"""
-Intercept-Resend attack simulation (Table II in the paper).
-Eve intercepts every qubit, measures it in a random basis, and
-resends a freshly prepared qubit to Bob based on her measurement.
-"""
 
 import random
 
@@ -12,7 +7,6 @@ n = 1024
 alice_bits = [random.randint(0, 1) for _ in range(n)]
 alice_bases = [random.choice(['+', 'x']) for _ in range(n)]
 
-# Eve intercepts and measures
 eve_bases = [random.choice(['+', 'x']) for _ in range(n)]
 eve_results = []
 for i in range(n):
@@ -21,7 +15,6 @@ for i in range(n):
     else:
         eve_results.append(random.randint(0, 1))
 
-# Eve resends to Bob based on her own (possibly wrong) measurement
 bob_bases = [random.choice(['+', 'x']) for _ in range(n)]
 bob_results = []
 for i in range(n):
@@ -30,7 +23,6 @@ for i in range(n):
     else:
         bob_results.append(random.randint(0, 1))
 
-# Sifting (Alice vs Bob, as usual — Eve is invisible to the basis comparison)
 alice_key, bob_key = [], []
 for i in range(n):
     if alice_bases[i] == bob_bases[i]:
