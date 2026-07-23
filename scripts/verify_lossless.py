@@ -1,15 +1,3 @@
-"""
-Verifies that every decrypted image is pixel-for-pixel identical to its
-original — confirms the "200/200 images recovered, 100% recovery rate"
-claim in Table IV of the paper.
-
-Compares DECODED PIXEL ARRAYS rather than raw file bytes, because the
-original is a JPEG/PNG file but the decrypted output is saved as PNG
-from a raw pixel buffer — the file formats differ even when the pixel
-content is identical, so a raw byte comparison is not meaningful here.
-
-Run AFTER batch_encrypt.py and batch_decrypt.py.
-"""
 
 import os
 import numpy as np
