@@ -2,9 +2,6 @@ import random
 
 n = 1024
 
-# -------------------------
-# Alice
-# -------------------------
 
 alice_bits = [random.randint(0,1) for _ in range(n)]
 
@@ -13,9 +10,6 @@ alice_bases = [
     for _ in range(n)
 ]
 
-# -------------------------
-# Eve pretending to Bob
-# -------------------------
 
 eve_bases_A = [
     random.choice(['+','x'])
@@ -38,10 +32,6 @@ for i in range(n):
             random.randint(0,1)
         )
 
-# -------------------------
-# Eve creates new qubits
-# for Bob
-# -------------------------
 
 eve_bits_to_bob = eve_results_A
 
@@ -49,10 +39,6 @@ eve_bases_B = [
     random.choice(['+','x'])
     for _ in range(n)
 ]
-
-# -------------------------
-# Bob
-# -------------------------
 
 bob_bases = [
     random.choice(['+','x'])
@@ -75,9 +61,6 @@ for i in range(n):
             random.randint(0,1)
         )
 
-# -------------------------
-# Alice/Bob Sifting
-# -------------------------
 
 alice_key = []
 
@@ -95,9 +78,6 @@ for i in range(n):
             bob_results[i]
         )
 
-# -------------------------
-# Key Mismatch
-# -------------------------
 
 errors = sum(
     a != b
