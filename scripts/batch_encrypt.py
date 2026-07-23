@@ -27,13 +27,7 @@ for category in ["NORMAL", "PNEUMONIA"]:
             filename + ".enc"
         )
 
-        # IMPORTANT: encrypt the RAW DECODED PIXEL BYTES, not the
-        # compressed JPEG/PNG file bytes. This makes ciphertext length
-        # match the image's pixel count (W*H for 8-bit grayscale), which
-        # is required for entropy/NPCR/UACI to be computed correctly in
-        # security_metrics_batch.py, and is standard practice in the
-        # image-encryption literature (the cipher operates on the pixel
-        # matrix, not on a compressed container format).
+    
         img = Image.open(input_path).convert('L')
         image_data = img.tobytes()
 
