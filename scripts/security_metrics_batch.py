@@ -1,16 +1,3 @@
-"""
-Computes Entropy, NPCR, and UACI for EVERY image in the dataset
-(original vs. its AES-256-CBC ciphertext, visualized as a same-size
-byte array), then reports the dataset-wide average — this is the
-number that belongs in Table V of the paper, not a single-image value.
-
-Run AFTER batch_encrypt.py.
-
-Because ciphertext is raw encrypted bytes (not a valid image container),
-we reconstruct a same-dimension "cipher image" from the first W*H bytes
-of ciphertext (skipping the 16-byte IV header), exactly like the
-comparison used in Section VII of the paper.
-"""
 
 import os
 from math import log2
@@ -20,7 +7,7 @@ from PIL import Image
 resized_root = r"dataset/resized"
 encrypted_root = r"encrypted_images"
 
-W, H = 256, 256  # must match resize_images.py target_size
+W, H = 256, 256  
 
 def entropy_of(arr):
     hist, _ = np.histogram(arr, bins=256, range=(0, 256))
@@ -68,7 +55,6 @@ print(f"Entropy  - mean: {np.mean(entropies):.4f}  min: {np.min(entropies):.4f} 
 print(f"NPCR (%) - mean: {np.mean(npcrs):.4f}  min: {np.min(npcrs):.4f}  max: {np.max(npcrs):.4f}")
 print(f"UACI (%) - mean: {np.mean(uacis):.4f}  min: {np.min(uacis):.4f}  max: {np.max(uacis):.4f}")
 
-# also save per-image CSV for full transparency
 import csv
 with open("security_metrics_full_dataset.csv", "w", newline="") as f:
     writer = csv.writer(f)
