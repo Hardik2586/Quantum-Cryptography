@@ -7,8 +7,6 @@ n = 1024
 alice_bits = [random.randint(0, 1) for _ in range(n)]
 
 # Step 2: Alice chooses random bases
-# '+' = Rectilinear basis
-# 'x' = Diagonal basis
 alice_bases = [random.choice(['+', 'x']) for _ in range(n)]
 
 # Step 3: Bob chooses random bases
@@ -20,11 +18,9 @@ bob_results = []
 for i in range(n):
 
     if alice_bases[i] == bob_bases[i]:
-        # Same basis → Bob gets correct bit
         bob_results.append(alice_bits[i])
 
     else:
-        # Different basis → Random outcome
         bob_results.append(random.randint(0, 1))
 
 
