@@ -1,10 +1,3 @@
-"""
-Reads every log file in logs/ (produced by run_all.py) and assembles a
-single RESULTS_SUMMARY.txt with the same tables that appear in the
-paper (Tables II-V), populated with YOUR machine's actual numbers.
-
-Run this LAST, after run_all.py has finished.
-"""
 
 import os
 import re
@@ -29,33 +22,28 @@ lines.append("=" * 70)
 lines.append("RESULTS SUMMARY -- reproduced on this machine")
 lines.append("=" * 70)
 
-# ---- BB84 no attack ----
 t = read_log("03_bb84_no_attack")
 lines.append("\nTable: BB84 Key Distribution (No Attack)")
 lines.append(f"  Sifted key length : {grab(r'Final Key Length:\s*(\d+)', t)}")
 lines.append(f"  QBER              : {grab(r'QBER:\s*([\d.]+)\s*%', t)}%")
 
-# ---- Lossless recovery ----
 t = read_log("07_verify_lossless")
 lines.append("\nTable: Secure Transmission / Recovery Rate")
 lines.append(f"  Images checked    : {grab(r'Total images checked\s*:\s*(\d+)', t)}")
 lines.append(f"  Recovery rate     : {grab(r'Recovery rate\s*:\s*([\d.]+)%', t)}%")
 
-# ---- Intercept-resend ----
 t = read_log("08_bb84_intercept")
 lines.append("\nTable II: Intercept-Resend Attack")
 lines.append(f"  Sifted key length : {grab(r'Sifted key length\s*:\s*(\d+)', t)}")
 lines.append(f"  Errors            : {grab(r'Errors\s*:\s*(\d+)', t)}")
 lines.append(f"  QBER              : {grab(r'QBER\s*:\s*([\d.]+)\s*%', t)}%")
 
-# ---- MITM ----
 t = read_log("09_bb84_mitm")
 lines.append("\nTable III: MITM Attack")
 lines.append(f"  Alice key length  : {grab(r'Alice Key Length:\s*(\d+)', t)}")
 lines.append(f"  Bob key length    : {grab(r'Bob Key Length:\s*(\d+)', t)}")
 lines.append(f"  Mismatch rate     : {grab(r'Mismatch Rate:\s*([\d.]+)\s*%', t)}%")
 
-# ---- Security metrics (dataset-wide) ----
 t = read_log("12_security_metrics")
 lines.append("\nTable V: Security Metrics (dataset-wide average)")
 m = re.search(r"Entropy\s*-\s*mean:\s*([\d.]+)", t) if t else None
@@ -65,7 +53,6 @@ lines.append(f"  NPCR % (mean)     : {m.group(1) if m else 'N/A'}")
 m = re.search(r"UACI \(%\) - mean:\s*([\d.]+)", t) if t else None
 lines.append(f"  UACI % (mean)     : {m.group(1) if m else 'N/A'}")
 
-# ---- Classical SVM ----
 t = read_log("14_svm_baseline")
 lines.append("\nTable: Classical SVM Baseline")
 lines.append(f"  Accuracy          : {grab(r'Accuracy:\s*([\d.]+)', t)}")
@@ -78,7 +65,6 @@ if cm:
 else:
     lines.append("  Confusion matrix  : N/A")
 
-# ---- QSVC ----
 t = read_log("15_train_qsvc")
 lines.append("\nTable: QSVC (Qiskit) -- your local run")
 lines.append(f"  Accuracy          : {grab(r'Accuracy\s*:\s*([\d.]+)', t)}")
