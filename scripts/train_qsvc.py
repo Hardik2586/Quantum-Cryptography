@@ -15,26 +15,17 @@ from qiskit.circuit.library import ZZFeatureMap
 from qiskit_machine_learning.kernels import FidelityQuantumKernel
 from qiskit_machine_learning.algorithms import QSVC
 
-# ======================================
-# Load Dataset
-# ======================================
-
 df = pd.read_csv("qml_attack_dataset.csv")
 
 print("\nDataset Shape:")
 print(df.shape)
 
-# ======================================
-# Features and Labels
-# ======================================
+
 
 X = df[['QBER', 'Key_Length', 'Errors']]
 
 y = df['Attack']
 
-# ======================================
-# Train-Test Split
-# ======================================
 
 X_train, X_test, y_train, y_test = train_test_split(
     X,
@@ -44,36 +35,22 @@ X_train, X_test, y_train, y_test = train_test_split(
     stratify=y
 )
 
-# ======================================
-# Feature Scaling
-# ======================================
-
 scaler = StandardScaler()
 
 X_train = scaler.fit_transform(X_train)
 
 X_test = scaler.transform(X_test)
 
-# ======================================
-# Quantum Feature Map
-# ======================================
 
 feature_map = ZZFeatureMap(
     feature_dimension=X_train.shape[1],
     reps=2
 )
 
-# ======================================
-# Quantum Kernel
-# ======================================
 
 quantum_kernel = FidelityQuantumKernel(
     feature_map=feature_map
 )
-
-# ======================================
-# QSVC Model
-# ======================================
 
 qsvc = QSVC(
     quantum_kernel=quantum_kernel
@@ -85,15 +62,9 @@ qsvc.fit(X_train, y_train)
 
 print("Training Complete!")
 
-# ======================================
-# Predictions
-# ======================================
 
 y_pred = qsvc.predict(X_test)
 
-# ======================================
-# Evaluation
-# ======================================
 
 accuracy = accuracy_score(y_test, y_pred)
 
