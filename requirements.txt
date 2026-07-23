@@ -1,0 +1,9 @@
+numpy
+pandas
+scikit-learn
+Pillow
+pycryptodome
+matplotlib
+qiskit
+qiskit-machine-learning
+qiskit-aer

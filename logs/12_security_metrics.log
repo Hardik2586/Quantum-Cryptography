@@ -1,0 +1,8 @@
+
+===== DATASET-WIDE SECURITY METRICS =====
+Images evaluated : 200
+Entropy  - mean: 7.9972  min: 7.9963  max: 7.9978
+NPCR (%) - mean: 99.6098  min: 99.5377  max: 99.6857
+UACI (%) - mean: 30.8960  min: 28.2347  max: 34.5368
+
+Per-image results saved to security_metrics_full_dataset.csv

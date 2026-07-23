@@ -1,0 +1,24 @@
+Generating normal samples...
+Generating attack samples...
+
+Dataset Created Successfully!
+
+Dataset Shape:
+(1000, 4)
+
+Class Distribution:
+Attack
+0    500
+1    500
+Name: count, dtype: int64
+
+QBER Statistics:
+        count       mean       std  ...        50%        75%        max
+Attack                              ...                                 
+0       500.0   1.791639  0.902966  ...   1.693322   2.388067   4.637097
+1       500.0  25.886398  1.919427  ...  25.819125  27.272727  31.914894
+
+[2 rows x 8 columns]
+
+Dataset saved as:
+qml_attack_dataset.csv

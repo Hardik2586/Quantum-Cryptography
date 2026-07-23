@@ -1,0 +1,31 @@
+
+Dataset Shape:
+(1000, 4)
+
+Training QSVC...
+Training Complete!
+
+===== QSVC RESULTS =====
+Accuracy : 0.9050
+Precision: 0.9263
+Recall   : 0.8800
+F1 Score : 0.9026
+
+Confusion Matrix:
+[[93  7]
+ [12 88]]
+
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.89      0.93      0.91       100
+           1       0.93      0.88      0.90       100
+
+    accuracy                           0.91       200
+   macro avg       0.91      0.91      0.90       200
+weighted avg       0.91      0.91      0.90       200
+
+
+----- STDERR -----
+C:\Users\hardi\Downloads\Reproduction_Package_v2\scripts\train_qsvc.py:61: DeprecationWarning: The class ``qiskit.circuit.library.data_preparation._zz_feature_map.ZZFeatureMap`` is deprecated as of Qiskit 2.1. It will be removed in Qiskit 3.0. Use the zz_feature_map function as a replacement. Note that this will no longer return a BlueprintCircuit, but just a plain QuantumCircuit.
+  feature_map = ZZFeatureMap(
