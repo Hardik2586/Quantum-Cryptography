@@ -3,14 +3,12 @@ from Crypto.Util.Padding import unpad
 from PIL import Image
 import os
 
-# Load AES key
 with open("aes_key.bin", "rb") as f:
     key = f.read()
 
 input_root = r"encrypted_images"
 output_root = r"decrypted_images"
 
-# Must match resize_images.py's target_size
 IMG_SIZE = (256, 256)
 
 for category in ["NORMAL", "PNEUMONIA"]:
@@ -27,8 +25,7 @@ for category in ["NORMAL", "PNEUMONIA"]:
 
         base_name = os.path.splitext(filename.replace(".enc", ""))[0]
 
-        # Saved as PNG (lossless) since we now decrypt back to a raw
-        # pixel buffer, not a JPEG-encoded file.
+    
         output_path = os.path.join(
             output_folder,
             base_name + ".png"
