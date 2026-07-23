@@ -9,21 +9,13 @@ dataset = []
 
 
 def simulate_bb84(with_eve=False, noise_probability=0.02):
-    """
-    Simulate BB84 protocol with optional intercept-resend attack
-    and realistic channel noise.
-    """
 
-    # ---------------------------
-    # Alice
-    # ---------------------------
+
     alice_bits = [random.randint(0, 1) for _ in range(N_QUBITS)]
 
     alice_bases = [random.choice(['+', 'x']) for _ in range(N_QUBITS)]
 
-    # ---------------------------
-    # Eve (optional)
-    # ---------------------------
+
     if with_eve:
 
         eve_bases = [random.choice(['+', 'x']) for _ in range(N_QUBITS)]
@@ -48,9 +40,7 @@ def simulate_bb84(with_eve=False, noise_probability=0.02):
         transmitted_bits = alice_bits
         transmitted_bases = alice_bases
 
-    # ---------------------------
-    # Bob
-    # ---------------------------
+ 
     bob_bases = [random.choice(['+', 'x']) for _ in range(N_QUBITS)]
 
     bob_results = []
@@ -72,9 +62,7 @@ def simulate_bb84(with_eve=False, noise_probability=0.02):
 
             bob_results.append(random.randint(0, 1))
 
-    # ---------------------------
-    # Sifting
-    # ---------------------------
+  
     alice_key = []
 
     bob_key = []
@@ -87,9 +75,7 @@ def simulate_bb84(with_eve=False, noise_probability=0.02):
 
             bob_key.append(bob_results[i])
 
-    # ---------------------------
-    # QBER Calculation
-    # ---------------------------
+
     errors = 0
 
     for a, b in zip(alice_key, bob_key):
@@ -103,9 +89,6 @@ def simulate_bb84(with_eve=False, noise_probability=0.02):
     return len(alice_key), errors, qber
 
 
-# ======================================
-# Generate Normal Communication Samples
-# ======================================
 
 print("Generating normal samples...")
 
@@ -120,16 +103,13 @@ for _ in range(NUM_SAMPLES):
     )
 
     dataset.append([
-        qber * 100,     # QBER (%)
+        qber * 100,     
         key_length,
         errors,
-        0               # No attack
+        0               
     ])
 
 
-# ======================================
-# Generate Attack Samples
-# ======================================
 
 print("Generating attack samples...")
 
@@ -147,13 +127,10 @@ for _ in range(NUM_SAMPLES):
         qber * 100,
         key_length,
         errors,
-        1               # Attack present
+        1            
     ])
 
 
-# ======================================
-# Save Dataset
-# ======================================
 
 df = pd.DataFrame(
     dataset,
@@ -168,9 +145,6 @@ df = pd.DataFrame(
 df.to_csv("qml_attack_dataset.csv", index=False)
 
 
-# ======================================
-# Display Statistics
-# ======================================
 
 print("\nDataset Created Successfully!")
 
